@@ -1,14 +1,17 @@
 {
   "todos": [
     {
-      "id": 3,
+      "id": 1,
       "name": "Listen Putin",
-      "status": "false"
+      "status": true
     },
     {
-      "id": 5,
+      "id": 6,
       "name": "Doing todolist",
-      "status": "false"
+      "status": true
+    },
+    {
+      "id": 7
     }
   ]
 }
