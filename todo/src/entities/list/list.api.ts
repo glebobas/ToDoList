@@ -1,4 +1,3 @@
-import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseApi } from '../../shared/api/rtk/baseApi';
 import { BASE_API_TAG } from '../../shared/api/rtk/tags';
 import { EditTodoType } from './todos.types';

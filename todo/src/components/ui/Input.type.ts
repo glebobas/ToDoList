@@ -6,5 +6,6 @@ export type InputTypeProps = {
   value: InputHTMLAttributes<HTMLInputElement>['value'];
   type?: HTMLInputTypeAttribute;
   id: string;
-  onClick: any
+  children: any;
+  errors:any;
 }

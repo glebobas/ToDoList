@@ -7,7 +7,8 @@ import {
   useAddTodoMutation,
 } from '../entities/list/list.api';
 import { Input } from '../components/ui/Input';
-import FormikWrapper from '../components/shared/FormikWrapper/FormikWrapper';
+import { FormikWrapper } from '../components/shared/FormikWrapper/FormikWrapper';
+import { initialValues, basicSchema } from './Form.const';
 
 const HomePage: FC = () => {
   const { data = [] } = useGetTodosQuery([]);
@@ -31,29 +32,48 @@ const HomePage: FC = () => {
       }, 2000);
     } catch (error: any) {}
   };
-  const onSubmit = async (form: string) => {
-     await addTodo(form).unwrap()
-  }
+  const onSubmit = async (form: any) => {
+    
+    try {
+      await addTodo(form).unwrap();
+    } catch (error) {}
+  };
+
   return (
     <div>
       <div className="text-center text-2xl font-bold">ToDo</div>
       <div className="w-[85%] ml-auto mr-auto">
-        <FormikWrapper onSubmit={(form) => onSubmit(form)}>
-        {(getFieldProps) => ( 
-          <Input
-            type="todo"
-            id='todo'
-            onClick={onSubmit}
-            {...getFieldProps('todo')}
-          />
-        )}
+        <FormikWrapper
+          onSubmit={(form: any) => onSubmit(form)}
+          initialValues={initialValues}
+          validationSchema={basicSchema}
+        >
+          {(getFieldProps, errors) => (
+
+            <Input errors={errors} id="name" type="name" {...getFieldProps('name')}>
+              <button
+                type="submit"
+                className="mr-5"
+                onSubmit={(form: any) => onSubmit(form)}
+              >
+                <img
+                  className="h-[25px] w-[25px]"
+                  src="https://cdn-icons-png.flaticon.com/512/18/18659.png"
+                  alt=""
+                />
+              </button>
+            </Input>
+          )}
         </FormikWrapper>
       </div>
 
       <div className="flex text-center justify-center">
         <ul className="mt-20">
           {data.map((todo: any) => (
-            <li className=" flex mb-7 items-center justify-between text-xl italic">
+            <li
+              className=" flex mb-7 items-center justify-between text-xl italic"
+              key={todo.id}
+            >
               <input
                 onClick={updateHandler(todo.id)}
                 className="mr-5 cursor-pointer"
