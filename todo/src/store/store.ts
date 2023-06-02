@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from '../entities/rootReducer';
 import { baseApi } from '../shared/api/rtk/baseApi';
+import type { TypedUseSelectorHook } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   FLUSH,
   PAUSE,
@@ -47,3 +49,10 @@ export const store = configureStore({
 } as config_store);
 
 export const persistedStore = persistStore(store);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+
