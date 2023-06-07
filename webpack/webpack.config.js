@@ -2,46 +2,64 @@ const path = require('path');
 
 const modules = (context) => ({
   ts: {
-    test: /\.tsx?$/,
+    test: /\.ts(x?)$/,
     use: 'ts-loader',
     exclude: /node_modules/,
   },
+  js: {
+    test: /\.(js)$/,
+    use: [
+      {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                useBuiltIns: 'entry',
+              },
+            ],
+          ],
+        },
+      },
+    ],
+    exclude: /node_modules/,
+  },
   files: {
-    test: /\.(png|jpg)$/,
+    test: /\.(png|jpg|ico)$/,
     use: ['file-loader'],
-},
-svg: {
+  },
+  svg: {
     test: /\.svg$/i,
     issuer: /\.[jt]sx?$/,
     use: ['@svgr/webpack'],
-},
-css: {
+  },
+  css: {
     test: /\.css$/,
     use: [
-        'style-loader',
-        'css-loader',
-        {
-            loader: 'postcss-loader',
-            options: {
-                postcssOptions: {
-                    config: path.resolve(context, 'postcss.config.js'),
-                },
-            },
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'postcss-loader',
+        options: {
+          postcssOptions: {
+            config: path.resolve(context, 'postcss.config.js'),
+          },
         },
+      },
     ],
-},
+  },
 });
 
-
 const resolve = (context) => ({
-	extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    alias: {
-		'@/public': path.resolve(context, './public'),
-		'@': path.resolve(context, './src'),
-	},
+  extensions: ['.ts', '.tsx', '.js', '.json', '.jsx'],
+  alias: {
+    '@/public': path.resolve(context, './public'),
+    '@': path.resolve(context, './src'),
+  },
 });
 
 module.exports = ({ context }) => ({
-	modules: modules(context),
-	resolve: resolve(context),
+  modules: modules(context),
+  resolve: resolve(context),
 });

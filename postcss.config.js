@@ -1,4 +1,6 @@
 const path = require('path');
+// const context = path.resolve(__dirname, './');
+console.log('===========>tail', path.resolve(__dirname, 'tailwind.config.js'))
 
 const plugins = [
 	'postcss-import',
