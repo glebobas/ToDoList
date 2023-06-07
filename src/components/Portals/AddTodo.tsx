@@ -13,7 +13,7 @@ export const AddTodoPortal: FC = () => {
   // setTimeout(() => {
   //   closeAlert()
   // }, 5000)
-const {AddTodo: open, props} = useAppSelector((state) => state.portals)
+const {AddTodo: open } = useAppSelector((state) => state.portals)
 console.log(open)
   return (
     <PortalWithState>
