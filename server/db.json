@@ -2,16 +2,16 @@
   "todos": [
     {
       "id": 1,
-      "name": "Listen Putin",
+      "name": "test 1",
       "status": true
     },
     {
-      "name": "test",
+      "name": "test 2",
       "status": true,
       "id": 2
     },
     {
-      "name": "test 2",
+      "name": "test 3",
       "status": true,
       "id": 3
     }
